@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        API_Riot_Async_Call api_riot_async_call = new API_Riot_Async_Call(this);
+        API_Riot_Async_Call api_riot_async_call = new API_Riot_Async_Call();
         api_riot_async_call.execute();
 
     }
