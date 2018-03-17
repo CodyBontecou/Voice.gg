@@ -34,14 +34,14 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
 
     @Override
     protected Summoner doInBackground(Void... voids) {
-        ApiConfig config = new ApiConfig().setKey("RGAPI-916224bb-1746-47b6-9c0e-bdb5c0d1c4aa");
+        ApiConfig config = new ApiConfig().setKey("RGAPI-6300431c-5070-4d94-9329-d80c1aa8e0f5");
         RiotApi api = new RiotApi(config);
-
         // First we need to request the summoner because we will need it's account ID
         Summoner summoner = null;
         try {
-            summoner = api.getSummonerByName(Platform.NA, "imaqtpie");
+            summoner = api.getSummonerByName(Platform.NA, "Zoeful Day");
         } catch (RiotApiException e) {
+            Log.d("ddd", "Summoner Not Found");
             e.printStackTrace();
         }
 
@@ -51,6 +51,8 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
             Log.d("ddd", "Account ID: " + summoner.getAccountId());
             Log.d("ddd", "Summoner Level: " + summoner.getSummonerLevel());
             Log.d("ddd", "Profile Icon ID: " + summoner.getProfileIconId());
+        }else{
+            //Log.d("ddd", "Summoner Not Found");
         }
 //         Then we can use the account ID to request the summoner's match list
         MatchList matchList = null;
@@ -67,14 +69,14 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
 
 //            Log.d("ddd", String.valueOf(matchReferences.get(matchReferences.size()-1).getGameId()));
 //            Log.d("ddd", String.valueOf(matchReferences.get(matchReferences.size()-1).getChampion()));
-        try {
-            champion = api.getDataChampion(Platform.EUW, matchReferences.get(0).getChampion(), null, null,
-                    ChampionTags.ALL);
-            Log.d("ddd", champion.getName());
-            Log.d("ddd", champion.getPassive().toString());
-        } catch (RiotApiException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            champion = api.getDataChampion(Platform.EUW, matchReferences.get(0).getChampion(), null, null,
+//                    ChampionTags.ALL);
+//            Log.d("ddd", champion.getName());
+//            Log.d("ddd", champion.getPassive().toString());
+//        } catch (RiotApiException e) {
+//            e.printStackTrace();
+//        }
 
 
         // We can now iterate over the match list to access the data
