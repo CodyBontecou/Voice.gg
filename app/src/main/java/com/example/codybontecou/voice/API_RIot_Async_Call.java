@@ -7,20 +7,20 @@ import android.util.Log;
 import net.rithms.riot.api.ApiConfig;
 import net.rithms.riot.api.RiotApi;
 import net.rithms.riot.api.RiotApiException;
-import net.rithms.riot.api.endpoints.match.dto.MatchList;
-import net.rithms.riot.api.endpoints.match.dto.MatchReference;
-import net.rithms.riot.api.endpoints.static_data.constant.ChampionTags;
+import net.rithms.riot.api.endpoints.champion.dto.ChampionList;
+import net.rithms.riot.api.endpoints.static_data.constant.ChampionListTags;
 import net.rithms.riot.api.endpoints.static_data.dto.Champion;
 import net.rithms.riot.api.endpoints.summoner.dto.Summoner;
 import net.rithms.riot.constant.Platform;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by codybontecou on 3/10/18.
  */
 
-class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
+class API_Riot_Async_Call extends AsyncTask<Void, Integer, net.rithms.riot.api.endpoints.static_data.dto.ChampionList> {
 
     private Champion champion;
     private Context mContext;
@@ -33,13 +33,23 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
     }
 
     @Override
+<<<<<<< HEAD
     protected Summoner doInBackground(Void... voids) {
         ApiConfig config = new ApiConfig().setKey("RGAPI-6300431c-5070-4d94-9329-d80c1aa8e0f5");
+=======
+    protected net.rithms.riot.api.endpoints.static_data.dto.ChampionList doInBackground(Void... voids) {
+        ApiConfig config = new ApiConfig().setKey("RGAPI-568580e0-bfca-43f2-b9d8-c0b2aedfabca");
+>>>>>>> remotes/origin/new_queries
         RiotApi api = new RiotApi(config);
         // First we need to request the summoner because we will need it's account ID
+        // ############# IMPORTANT: MAKE SURE THE SUMMONER IS INGAME #####################
         Summoner summoner = null;
         try {
+<<<<<<< HEAD
             summoner = api.getSummonerByName(Platform.NA, "Zoeful Day");
+=======
+            summoner = api.getSummonerByName(Platform.NA, "anderz");
+>>>>>>> remotes/origin/new_queries
         } catch (RiotApiException e) {
             Log.d("ddd", "Summoner Not Found");
             e.printStackTrace();
@@ -54,18 +64,19 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
         }else{
             //Log.d("ddd", "Summoner Not Found");
         }
-//         Then we can use the account ID to request the summoner's match list
-        MatchList matchList = null;
-        List<MatchReference> matchReferences = null;
+
         try {
-            if (summoner != null) {
-                matchList = api.getMatchListByAccountId(Platform.NA, summoner.getAccountId());
-                matchReferences = matchList.getMatches();
+            net.rithms.riot.api.endpoints.static_data.dto.ChampionList championList = api.getDataChampionList(Platform.EUW, null, null, false, ChampionListTags.ALL);
+            for (int i = 0; i < championList.getData().size(); i++) {
+//                Champion champion = api.getDataChampion(Platform.EUW, championIDS.getChampions().get(i), null, null, ChampionTags.ALL);
+                Log.d("ddd", String.valueOf(championList.getData()));
             }
+
         } catch (RiotApiException e) {
             e.printStackTrace();
         }
 
+<<<<<<< HEAD
 
 //            Log.d("ddd", String.valueOf(matchReferences.get(matchReferences.size()-1).getGameId()));
 //            Log.d("ddd", String.valueOf(matchReferences.get(matchReferences.size()-1).getChampion()));
@@ -84,9 +95,46 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, Summoner> {
             for (MatchReference match : matchList.getMatches()) {
                 System.out.println("GameID: " + match.getGameId());
             }
+=======
+        net.rithms.riot.api.endpoints.static_data.dto.ChampionList championList = null;
+        try {
+            championList = api.getDataChampionList(Platform.EUW, null, null, false, ChampionListTags.ALL);
+        } catch (RiotApiException e) {
+            e.printStackTrace();
+        }
+        Map<String, Champion> championByName = new HashMap<>();
+        for (Champion champion : championList.getData().values()) {
+            championByName.put(champion.getName().toLowerCase(), champion);
+        }
+        String name = "kayle";
+        Champion champion = championByName.get(name);
+        if (champion != null) {
+            Log.d("ddd","ID: " + champion.getId());
+            Log.d("ddd","Name: " + champion.getName());
+            Log.d("ddd","Stats: " + champion.getStats());
+            Log.d("ddd","Passive: " + champion.getPassive());
+            Log.d("ddd","Lore: " + champion.getLore());
+            Log.d("ddd","Title: " + champion.getTitle());
+            Log.d("ddd","Skins: " + champion.getSkins());
+            Log.d("ddd","Spell (Q): " + champion.getSpells().get(0));
+        } else {
+            Log.d("ddd","Sorry I don't recognize that champion name.");
+>>>>>>> remotes/origin/new_queries
         }
 
-
-        return summoner;
+        return null;
     }
 }
+
+//        try {
+//            championIDS = api.getChampions(Platform.NA, false);
+//            net.rithms.riot.api.endpoints.static_data.dto.ChampionList championList = api.getDataChampionList(Platform.EUW, null, null, false, ChampionListTags.ALL);
+//            for (int i = 0; i < championList.getData().size(); i++) {
+//////                Champion champion = api.getDataChampion(Platform.EUW, championIDS.getChampions().get(i), null, null, ChampionTags.ALL);
+//                Log.d("ddd", String.valueOf(championList.getData()));
+//            }
+//
+//        } catch (RiotApiException e) {
+//            e.printStackTrace();
+//        }
+//        return championIDS;
