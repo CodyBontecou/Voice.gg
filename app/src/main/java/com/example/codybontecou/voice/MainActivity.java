@@ -19,12 +19,17 @@ public class MainActivity extends AppCompatActivity {
 
         summoner = Prefs.getPrefs(MainActivity.this).getString("owner", null).toString();
 
+
         //API_Riot_Async_Call api_riot_async_call = new API_Riot_Async_Call();
         //api_riot_async_call.execute();
+
+
 
     }
 
     public void buttonClicked(View view) {
+
+
     }
 
 }
