@@ -1,4 +1,4 @@
-package splashScreens;
+package com.example.codybontecou.voice.splashScreens;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,18 +11,21 @@ import android.widget.Toast;
 import com.example.codybontecou.voice.MainActivity;
 import com.example.codybontecou.voice.R;
 
-import globalVal.Prefs;
+import com.example.codybontecou.voice.globalVal.Prefs;
+import com.example.codybontecou.voice.globalVal.UserData;
+import com.example.codybontecou.voice.globalVal.apiKey;
 
 public class SplashScreenInitialization extends AppCompatActivity {
 
     private Button mSave;
     private EditText mEditText;
+    private apiKey Key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_init);
-
+        Key.setKey("RGAPI-f8decca9-eabb-4b98-a1ef-d9b222e6cad8");
 
         //if (!Prefs.getPrefs(SplashScreenInitialization.this).getString("owner", "").isEmpty())
             //moveToMain();
@@ -37,8 +40,7 @@ public class SplashScreenInitialization extends AppCompatActivity {
                     Toast.makeText(SplashScreenInitialization.this, "Please enter your name", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-
-                    Prefs.getPrefs(SplashScreenInitialization.this).edit().putString("owner", mEditText.getText().toString()).commit();
+                    UserData.setUser(mEditText.getText().toString());
                     moveToMain();
                 }
             }
