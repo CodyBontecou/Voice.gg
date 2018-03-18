@@ -22,6 +22,18 @@ import com.example.codybontecou.voice.globalVal.apiKey;
 
 public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, Void> {
 
+    public interface AsyncResponse {
+        void processFinish(String output);
+    }
+
+    public AsyncResponse delegate = null;
+
+    public API_Riot_Get_Summoner_Stats_Async(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
+
+
+
 
     ApiConfig config = new ApiConfig().setKey(apiKey.getKey());
     RiotApi api = new RiotApi(config);
@@ -39,6 +51,7 @@ public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, 
 
         if (summoner != null) {
             Log.d("ddd", "Name: " + summoner.getName());
+            UserData.setUser(summoner.getName());
             Log.d("ddd", "Summoner ID: " + summoner.getId());
             UserData.setSummonerID(summoner.getId());
             Log.d("ddd", "Account ID: " + summoner.getAccountId());
@@ -50,6 +63,8 @@ public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, 
         }
 
 
+        delegate.processFinish("done");
         return null;
     }
+
 }

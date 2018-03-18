@@ -1,8 +1,10 @@
 package com.example.codybontecou.voice.splashScreens;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +13,12 @@ import android.widget.Toast;
 import com.example.codybontecou.voice.MainActivity;
 import com.example.codybontecou.voice.R;
 
+import com.example.codybontecou.voice.apiAsyncTasks.API_Riot_Get_Summoner_Stats_Async;
 import com.example.codybontecou.voice.globalVal.Prefs;
 import com.example.codybontecou.voice.globalVal.UserData;
 import com.example.codybontecou.voice.globalVal.apiKey;
 
-public class SplashScreenInitialization extends AppCompatActivity {
+public class SplashScreenInitialization extends AppCompatActivity implements API_Riot_Get_Summoner_Stats_Async.AsyncResponse{
 
     private Button mSave;
     private EditText mEditText;
@@ -25,7 +28,7 @@ public class SplashScreenInitialization extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_init);
-        Key.setKey("RGAPI-f8decca9-eabb-4b98-a1ef-d9b222e6cad8");
+        Key.setKey("RGAPI-691bf07b-e7b6-4aba-91e3-86bff5ea9946");
 
         //if (!Prefs.getPrefs(SplashScreenInitialization.this).getString("owner", "").isEmpty())
             //moveToMain();
@@ -41,8 +44,11 @@ public class SplashScreenInitialization extends AppCompatActivity {
                     return;
                 } else {
                     UserData.setUser(mEditText.getText().toString());
-                    moveToMain();
-                }
+                    new API_Riot_Get_Summoner_Stats_Async(SplashScreenInitialization.this).execute();
+//                           API_Riot_Get_Summoner_Stats_Async summoner_stats_async = new API_Riot_Get_Summoner_Stats_Async();
+//                           summoner_stats_async.execute();
+                          // moveToMain();
+                       }
             }
         });
     }
@@ -50,5 +56,11 @@ public class SplashScreenInitialization extends AppCompatActivity {
         Intent intent = new Intent(SplashScreenInitialization.this, MainActivity.class);
         SplashScreenInitialization.this.startActivity(intent);
         //SplashScreenInitialization.this.finish();
+    }
+
+    @Override
+    public void processFinish(String output) {
+        Log.d("ddd", "processFinish: stat async call");
+        moveToMain();
     }
 }

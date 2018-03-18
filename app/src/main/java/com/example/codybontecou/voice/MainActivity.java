@@ -2,6 +2,7 @@ package com.example.codybontecou.voice;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,9 +15,13 @@ import com.example.codybontecou.voice.globalVal.apiKey;
 import net.rithms.riot.api.ApiConfig;
 import net.rithms.riot.api.RiotApi;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-    TextView textView;
+    TextView summonerName;
+    TextView summonerLevel;
+    TextView summonerWins;
+    TextView summonerLoses;
+
     String summoner;
 
     @Override
@@ -27,23 +32,25 @@ public class MainActivity extends AppCompatActivity {
         summoner = UserData.getUser();
 
 
-       API_Riot_Get_Summoner_Stats_Async summoner_stats_async = new API_Riot_Get_Summoner_Stats_Async();
-       summoner_stats_async.execute();
+       //API_Riot_Get_Summoner_Stats_Async summoner_stats_async = new API_Riot_Get_Summoner_Stats_Async;
+       //new API_Riot_Get_Summoner_Stats_Async(this).execute();
 
-       textView = findViewById(R.id.textView);
-       textView.setText(UserData.User + " " + UserData.getLevel());
+        summonerName = findViewById(R.id.summonerName);
+        summonerLevel = findViewById(R.id.summonerLevel);
 
-
-        //API_Riot_Async_Call api_riot_async_call = new API_Riot_Async_Call();
-        //api_riot_async_call.execute();
-
+        try{
+            summonerName.setText(UserData.User);
+            summonerLevel.setText(""+UserData.getLevel());
+        }catch(Exception e){
+            Log.d("ddd", "main Loaded before Api stat call completed");
+        }
 
 
     }
 
     public void buttonClicked(View view) {
 
-
     }
+
 
 }
