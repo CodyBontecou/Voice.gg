@@ -1,4 +1,4 @@
-package globalVal;
+package com.example.codybontecou.voice.globalVal;
 
 import android.content.Context;
 import android.content.SharedPreferences;
