@@ -23,7 +23,7 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, net.rithms.riot.api.e
     }
     @Override
     protected net.rithms.riot.api.endpoints.static_data.dto.ChampionList doInBackground(Void... voids) {
-        ApiConfig config = new ApiConfig().setKey("RGAPI-6300431c-5070-4d94-9329-d80c1aa8e0f5");
+        ApiConfig config = new ApiConfig().setKey("RGAPI-f8decca9-eabb-4b98-a1ef-d9b222e6cad8");
         RiotApi api = new RiotApi(config);
         // First we need to request the summoner because we will need it's account ID
         // ############# IMPORTANT: MAKE SURE THE SUMMONER IS INGAME #####################
@@ -52,9 +52,9 @@ class API_Riot_Async_Call extends AsyncTask<Void, Integer, net.rithms.riot.api.e
         }
         net.rithms.riot.api.endpoints.static_data.dto.ChampionList championList = null;
         try {
-            championList = api.getDataChampionList(Platform.EUW, null, null, false, ChampionListTags.ALL);
+            championList = api.getDataChampionList(Platform.NA, null, null, false, ChampionListTags.ALL);
         } catch (RiotApiException e) {
-
+            Log.d("ddd", "Did not obtain champion list");
             e.printStackTrace();
         }
         Map<String, Champion> championByName = new HashMap<>();
