@@ -11,10 +11,7 @@ public final class apiKey {
     public static String Key;
 
     public static String getKey() {
-        return Key;
+        return Key = "RGAPI-7eceeb77-6c09-4d5b-b86e-e0fac87ef82e";
     }
 
-    public static void setKey(String key) {
-        Key = key;
-    }
 }
