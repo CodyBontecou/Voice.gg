@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.codybontecou.voice.globalVal.UserData;
 import com.example.codybontecou.voice.globalVal.apiKey;
+import com.example.codybontecou.voice.misc_classes.Api_Config_Utility;
 
 import net.rithms.riot.api.ApiConfig;
 import net.rithms.riot.api.RiotApi;
@@ -33,8 +34,7 @@ public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, 
     }
 
 
-    ApiConfig config = new ApiConfig().setKey(apiKey.getKey());
-    RiotApi api = new RiotApi(config);
+    private RiotApi api = new Api_Config_Utility().getApi();
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -54,22 +54,11 @@ public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, 
             e.printStackTrace();
         }
 
-        try{
-
-        }catch (Exception e){
-
-        }
-
         if (summoner != null) {
-            Log.d("ddd", "Name: " + summoner.getName());
             UserData.setUser(summoner.getName());
-            Log.d("ddd", "Summoner ID: " + summoner.getId());
             UserData.setSummonerID(summoner.getId());
-            Log.d("ddd", "Account ID: " + summoner.getAccountId());
             UserData.setAccountID(summoner.getAccountId());
-            Log.d("ddd", "Summoner Level: " +  summoner.getSummonerLevel());
             UserData.setLevel(summoner.getSummonerLevel());
-            Log.d("ddd", "Profile Icon ID: " + summoner.getProfileIconId());
             UserData.setIconID(summoner.getProfileIconId());
         }
 
