@@ -37,7 +37,7 @@ public class SplashScreenInitialization extends AppCompatActivity implements API
                 if (mEditText.getText().length() == 0) {
                     Toast.makeText(SplashScreenInitialization.this, "Please enter your name", Toast.LENGTH_SHORT).show();
                 } else {
-                    UserData.setUser(mEditText.getText().toString());
+                    UserData.setUser(mEditText.getText().toString().toLowerCase());
                     new API_Riot_Get_Summoner_Stats_Async(SplashScreenInitialization.this).execute();
 
                 }
