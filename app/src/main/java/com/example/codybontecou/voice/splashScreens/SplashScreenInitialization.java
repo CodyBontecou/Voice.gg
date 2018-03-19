@@ -28,7 +28,7 @@ public class SplashScreenInitialization extends AppCompatActivity implements API
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_init);
-        Key.setKey("RGAPI-691bf07b-e7b6-4aba-91e3-86bff5ea9946");
+        Key.setKey("RGAPI-7eceeb77-6c09-4d5b-b86e-e0fac87ef82e");
 
         //if (!Prefs.getPrefs(SplashScreenInitialization.this).getString("owner", "").isEmpty())
             //moveToMain();
@@ -45,9 +45,7 @@ public class SplashScreenInitialization extends AppCompatActivity implements API
                 } else {
                     UserData.setUser(mEditText.getText().toString());
                     new API_Riot_Get_Summoner_Stats_Async(SplashScreenInitialization.this).execute();
-//                           API_Riot_Get_Summoner_Stats_Async summoner_stats_async = new API_Riot_Get_Summoner_Stats_Async();
-//                           summoner_stats_async.execute();
-                          // moveToMain();
+
                        }
             }
         });

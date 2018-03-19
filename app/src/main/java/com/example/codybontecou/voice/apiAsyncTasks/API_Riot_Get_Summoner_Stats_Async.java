@@ -1,20 +1,20 @@
 package com.example.codybontecou.voice.apiAsyncTasks;
 
-import android.content.Context;
+import android.graphics.Region;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.codybontecou.voice.globalVal.UserData;
+import com.example.codybontecou.voice.globalVal.apiKey;
 
 import net.rithms.riot.api.ApiConfig;
 import net.rithms.riot.api.RiotApi;
 import net.rithms.riot.api.RiotApiException;
+import net.rithms.riot.api.endpoints.match.dto.MatchList;
+import net.rithms.riot.api.endpoints.match.dto.MatchReference;
 import net.rithms.riot.api.endpoints.static_data.dto.Stats;
 import net.rithms.riot.api.endpoints.summoner.dto.Summoner;
 import net.rithms.riot.constant.Platform;
-
-import com.example.codybontecou.voice.MainActivity;
-import com.example.codybontecou.voice.globalVal.Prefs;
-import com.example.codybontecou.voice.globalVal.UserData;
-import com.example.codybontecou.voice.globalVal.apiKey;
 
 /**
  * Created by admin on 3/17/18.
@@ -33,8 +33,6 @@ public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, 
     }
 
 
-
-
     ApiConfig config = new ApiConfig().setKey(apiKey.getKey());
     RiotApi api = new RiotApi(config);
 
@@ -44,9 +42,22 @@ public class API_Riot_Get_Summoner_Stats_Async extends AsyncTask<Void, Integer, 
 
         try {
             summoner = api.getSummonerByName(Platform.NA, UserData.getUser());
+            MatchList matchList = api.getMatchListByAccountId(Platform.NA, summoner.getAccountId());
+            if (matchList.getMatches() != null) {
+                for (MatchReference match : matchList.getMatches()) {
+                  Log.d("ttt", "GameID: " + match.getGameId());
+
+                }
+            }
         } catch (RiotApiException e) {
             Log.d("ddd", "Summoner Not Found");
             e.printStackTrace();
+        }
+
+        try{
+
+        }catch (Exception e){
+
         }
 
         if (summoner != null) {

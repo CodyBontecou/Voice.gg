@@ -5,15 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.codybontecou.voice.apiAsyncTasks.*;
-
-import com.example.codybontecou.voice.globalVal.Prefs;
 import com.example.codybontecou.voice.globalVal.UserData;
-import com.example.codybontecou.voice.globalVal.apiKey;
-
-import net.rithms.riot.api.ApiConfig;
-import net.rithms.riot.api.RiotApi;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -43,6 +37,7 @@ public class MainActivity extends AppCompatActivity{
             summonerLevel.setText(""+UserData.getLevel());
         }catch(Exception e){
             Log.d("ddd", "main Loaded before Api stat call completed");
+            Toast.makeText(this, "Unable To Load Summoner Data", Toast.LENGTH_LONG).show();
         }
 
 
