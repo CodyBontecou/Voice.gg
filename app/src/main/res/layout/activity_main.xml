@@ -12,31 +12,33 @@
     <include layout="@layout/toolbar_main"/>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="buttonClicked"
-        android:text="Listen" />
+    <!--<ListView-->
+        <!--android:id="@+id/summonerInfo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
     <TextView
         android:id="@+id/summonerName"
         android:textSize="40sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sample1"
+        android:text=""
         android:layout_marginTop="40dp"/>
     <TextView
         android:id="@+id/summonerLevel"
-        android:textColor="@color/Aqua"
+        android:textColor="@color/Black"
         android:textSize="45sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sample2"
+        android:text=""
         android:layout_marginTop="40dp" />
-    <Button
+    <TextView
+        android:id="@+id/summonerChampion"
+        android:textColor="@color/Black"
+        android:textSize="45sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="In Game"
-        android:layout_marginTop="200dp"/>
+        android:text=""
+        android:layout_marginTop="40dp" />
 
 
 
